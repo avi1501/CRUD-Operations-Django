@@ -1,0 +1,70 @@
+{% extends 'student/base.html' %}
+
+{% block content %}
+{##}
+{#    <a href="{% url 'student' %}"><input type="submit" value = 'Insert'></a>#}
+{##}
+{#<ol>#}
+{#    {% for student in all_students %}#}
+{#            <li>{{ student.firstName }} {{ student.lastName }}</li>#}
+{#            <ul>#}
+{#                <li>{{ student.emailId }}</li>#}
+{#                <li>{{ student.enrollment }}</li>#}
+{#                <li>{{ student.subjects }}</li>#}
+{#                <li>#}
+{#                    <a href="{% url 'update' student.id %}">#}
+{#                        <input type="submit" value="edit">#}
+{#                    </a>#}
+{#                    <form action="{% url 'delete' student.id %}" method="POST">#}
+{#                        {% csrf_token %}#}
+{#                        <input type="submit" value="delete">#}
+{#                    </form>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </li>#}
+{#    {% endfor %}#}
+{#</ol>#}
+
+<table class="table">
+<thead>
+<tr class ='row'>
+
+    <td class="col-lg-2">Name</td>
+    <td class="col-lg-2">Enrollment</td>
+    <td class="col-lg-2">Email ID</td>
+    <td class="col-lg-2">Subject</td>
+    <td class="col-lg-4"><a href="{% url 'student' %}"><input class="btn btn-success" type="button" value="Insert"></a></td>
+
+</tr>
+</thead>
+<tbody>
+    {% for data in all_students %}
+    <tr class ='row'>
+    <td class="col-lg-2">{{ data.firstName }} {{ data.lastName }}</td>
+    <td class="col-lg-2">{{ data.enrollment }}</td>
+    <td class="col-lg-2">{{ data.emailId }}</td>
+    <td class="col-lg-2">{{ data.subjects }}</td>
+    <td class="col-lg-4">
+        <div class="row">
+            <div class="col-lg-2">
+                <a href="{% url 'update' data.id %}">
+                    <input class="btn btn-primary" type="button" value="Update">
+                </a>
+            </div>
+            <div class="col-lg-2">
+                <form action="{% url 'delete' data.id %}" method="POST">
+                    {% csrf_token %}
+                    <input class="'btn btn-danger" type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
+
+
+    </td>
+    </tr>
+
+{% endfor %}
+</tbody>
+</table>
+
+{% endblock %}
